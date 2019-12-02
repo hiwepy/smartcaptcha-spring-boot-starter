@@ -1,4 +1,4 @@
-# spring-boot-starter-smartcaptcha
+# smartcaptcha-spring-boot-starter
 
 
 ### 说明
@@ -12,7 +12,7 @@
 ``` xml
 <dependency>
 	<groupId>${project.groupId}</groupId>
-	<artifactId>spring-boot-starter-smartcaptcha</artifactId>
+	<artifactId>smartcaptcha-spring-boot-starter</artifactId>
 	<version>${project.version}</version>
 </dependency>
 ```
