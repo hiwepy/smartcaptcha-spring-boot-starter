@@ -17,6 +17,7 @@ import ml.miron.captcha.servlet.RefreshCaptchaFilter;
 @Configuration
 @ConditionalOnClass({ CaptchaServlet.class })
 @EnableConfigurationProperties(SmartCaptchaProperties.class)
+/**\n * Auto-configuration for SmartCaptchaAutoConfiguration.\n *\n * @author [@Loong Wan](https://github.com/loong10k)\n * @since 1.0.0\n */
 public class SmartCaptchaAutoConfiguration {
 
 	private static final String PARAM_HEIGHT = "captcha-height";
