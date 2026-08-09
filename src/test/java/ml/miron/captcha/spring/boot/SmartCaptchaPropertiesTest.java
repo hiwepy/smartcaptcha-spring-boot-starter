@@ -21,121 +21,78 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * Unit tests for {{ @link SmartCaptchaProperties }}.
- *
- * <p>Verifies default values, getters/setters and POJO contract.</p>
+ * Unit tests for {@link SmartCaptchaProperties}.
  *
  * @author [@Loong Wan](https://github.com/loong10k)
  * @since 1.0.0
  */
 @DisplayName("SmartCaptchaProperties Tests")
 class SmartCaptchaPropertiesTest {
+
     @Test
-    @DisplayName("Default constructor creates non-null instance")
+    @DisplayName("Default constructor creates non-null instance with defaults")
     void testDefaultInstance() {
         SmartCaptchaProperties props = new SmartCaptchaProperties();
         assertThat(props).isNotNull();
+        assertThat(props.getImagePattern()).isEqualTo("/captcha.jpg");
+        assertThat(props.getRefreshPattern()).isEqualTo("/captcha.html");
+        assertThat(props.getAudioPattern()).isEqualTo("/audio.wav");
+        assertThat(props.getAudioPath()).isNull();
+        assertThat(props.getWidth()).isEqualTo(200);
+        assertThat(props.getHeight()).isEqualTo(50);
     }
 
     @Test
-    @DisplayName("Field 'imagePattern' can be set and read")
-    void testImagePatternField() {
-        SmartCaptchaProperties props = new SmartCaptchaProperties();
-        // Use reflection to set private field (covers all fields including those without setters)
-        try {
-            java.lang.reflect.Field f = SmartCaptchaProperties.class.getDeclaredField("imagePattern");
-            f.setAccessible(true);
-            f.set(props, "test");
-            Object value = f.get(props);
-            assertThat(value).isNotNull();
-        } catch (Exception e) {
-            // Field may have a more complex type; skip silently
-        }
-    }
-
-    @Test
-    @DisplayName("Field 'refreshPattern' can be set and read")
-    void testRefreshPatternField() {
-        SmartCaptchaProperties props = new SmartCaptchaProperties();
-        // Use reflection to set private field (covers all fields including those without setters)
-        try {
-            java.lang.reflect.Field f = SmartCaptchaProperties.class.getDeclaredField("refreshPattern");
-            f.setAccessible(true);
-            f.set(props, "test");
-            Object value = f.get(props);
-            assertThat(value).isNotNull();
-        } catch (Exception e) {
-            // Field may have a more complex type; skip silently
-        }
-    }
-
-    @Test
-    @DisplayName("Field 'audioPattern' can be set and read")
-    void testAudioPatternField() {
-        SmartCaptchaProperties props = new SmartCaptchaProperties();
-        // Use reflection to set private field (covers all fields including those without setters)
-        try {
-            java.lang.reflect.Field f = SmartCaptchaProperties.class.getDeclaredField("audioPattern");
-            f.setAccessible(true);
-            f.set(props, "test");
-            Object value = f.get(props);
-            assertThat(value).isNotNull();
-        } catch (Exception e) {
-            // Field may have a more complex type; skip silently
-        }
-    }
-
-    @Test
-    @DisplayName("Field 'audioPath' can be set and read")
-    void testAudioPathField() {
-        SmartCaptchaProperties props = new SmartCaptchaProperties();
-        // Use reflection to set private field (covers all fields including those without setters)
-        try {
-            java.lang.reflect.Field f = SmartCaptchaProperties.class.getDeclaredField("audioPath");
-            f.setAccessible(true);
-            f.set(props, "test");
-            Object value = f.get(props);
-            assertThat(value).isNotNull();
-        } catch (Exception e) {
-            // Field may have a more complex type; skip silently
-        }
-    }
-
-    @Test
-    @DisplayName("Field 'width' can be set and read")
-    void testWidthField() {
-        SmartCaptchaProperties props = new SmartCaptchaProperties();
-        // Use reflection to set private field (covers all fields including those without setters)
-        try {
-            java.lang.reflect.Field f = SmartCaptchaProperties.class.getDeclaredField("width");
-            f.setAccessible(true);
-            f.set(props, 42);
-            Object value = f.get(props);
-            assertThat(value).isNotNull();
-        } catch (Exception e) {
-            // Field may have a more complex type; skip silently
-        }
-    }
-
-    @Test
-    @DisplayName("Field 'height' can be set and read")
-    void testHeightField() {
-        SmartCaptchaProperties props = new SmartCaptchaProperties();
-        // Use reflection to set private field (covers all fields including those without setters)
-        try {
-            java.lang.reflect.Field f = SmartCaptchaProperties.class.getDeclaredField("height");
-            f.setAccessible(true);
-            f.set(props, 42);
-            Object value = f.get(props);
-            assertThat(value).isNotNull();
-        } catch (Exception e) {
-            // Field may have a more complex type; skip silently
-        }
-    }
-
-    @Test
-    @DisplayName("Public constant 'PREFIX' has expected value")
+    @DisplayName("PREFIX constant has expected value")
     void testPREFIXConstant() {
         assertThat(SmartCaptchaProperties.PREFIX).isEqualTo("smart-captcha");
+    }
+
+    @Test
+    @DisplayName("imagePattern getter/setter works correctly")
+    void testImagePatternGetterSetter() {
+        SmartCaptchaProperties props = new SmartCaptchaProperties();
+        props.setImagePattern("/custom/image");
+        assertThat(props.getImagePattern()).isEqualTo("/custom/image");
+    }
+
+    @Test
+    @DisplayName("refreshPattern getter/setter works correctly")
+    void testRefreshPatternGetterSetter() {
+        SmartCaptchaProperties props = new SmartCaptchaProperties();
+        props.setRefreshPattern("/custom/refresh");
+        assertThat(props.getRefreshPattern()).isEqualTo("/custom/refresh");
+    }
+
+    @Test
+    @DisplayName("audioPattern getter/setter works correctly")
+    void testAudioPatternGetterSetter() {
+        SmartCaptchaProperties props = new SmartCaptchaProperties();
+        props.setAudioPattern("/custom/audio");
+        assertThat(props.getAudioPattern()).isEqualTo("/custom/audio");
+    }
+
+    @Test
+    @DisplayName("audioPath getter/setter works correctly")
+    void testAudioPathGetterSetter() {
+        SmartCaptchaProperties props = new SmartCaptchaProperties();
+        props.setAudioPath("/sounds");
+        assertThat(props.getAudioPath()).isEqualTo("/sounds");
+    }
+
+    @Test
+    @DisplayName("width getter/setter works correctly")
+    void testWidthGetterSetter() {
+        SmartCaptchaProperties props = new SmartCaptchaProperties();
+        props.setWidth(300);
+        assertThat(props.getWidth()).isEqualTo(300);
+    }
+
+    @Test
+    @DisplayName("height getter/setter works correctly")
+    void testHeightGetterSetter() {
+        SmartCaptchaProperties props = new SmartCaptchaProperties();
+        props.setHeight(100);
+        assertThat(props.getHeight()).isEqualTo(100);
     }
 }

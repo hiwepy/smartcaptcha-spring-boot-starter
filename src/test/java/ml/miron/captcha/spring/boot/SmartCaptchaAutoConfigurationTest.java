@@ -22,7 +22,7 @@ import org.springframework.boot.test.context.runner.ApplicationContextRunner;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * Unit tests for {{ @link SmartCaptchaAutoConfiguration }}.
+ * Unit tests for {@link SmartCaptchaAutoConfiguration}.
  *
  * <p>Verifies the auto-configuration activates under the expected conditions
  * and exposes its declared beans.</p>
@@ -43,17 +43,33 @@ class SmartCaptchaAutoConfigurationTest {
     }
 
     @Test
-    @DisplayName("Auto-configuration loads when 'spring.boot.enabled=true'")
-    void testLoadsWhenEnabledPropertySet() {
+    @DisplayName("Auto-configuration loads and registers all beans")
+    void testLoadsAllBeans() {
         runner.withUserConfiguration(SmartCaptchaAutoConfiguration.class)
-                .withPropertyValues("spring.boot.enabled=true")
-                .run(context -> assertThat(context).hasSingleBean(SmartCaptchaAutoConfiguration.class));
+                .run(context -> {
+                    assertThat(context).hasSingleBean(SmartCaptchaAutoConfiguration.class);
+                    assertThat(context).hasBean("imageCaptchaServlet");
+                    assertThat(context).hasBean("audioCaptchaServlet");
+                    assertThat(context).hasBean("refreshCaptchaFilter");
+                });
     }
 
     @Test
-    @DisplayName("Auto-configuration is absent when property is not set")
-    void testNotLoadedWhenPropertyAbsent() {
+    @DisplayName("Properties are properly bound")
+    void testPropertiesBinding() {
         runner.withUserConfiguration(SmartCaptchaAutoConfiguration.class)
-                .run(context -> assertThat(context).doesNotHaveBean(SmartCaptchaAutoConfiguration.class));
+                .withPropertyValues(
+                        "smartcaptcha.height=80",
+                        "smartcaptcha.width=200",
+                        "smartcaptcha.image-pattern=/captcha/image",
+                        "smartcaptcha.audio-pattern=/captcha/audio",
+                        "smartcaptcha.refresh-pattern=/captcha/refresh"
+                )
+                .run(context -> {
+                    assertThat(context).hasSingleBean(SmartCaptchaProperties.class);
+                    SmartCaptchaProperties props = context.getBean(SmartCaptchaProperties.class);
+                    assertThat(props.getHeight()).isEqualTo(80);
+                    assertThat(props.getWidth()).isEqualTo(200);
+                });
     }
 }
