@@ -3,6 +3,12 @@ package ml.miron.captcha.spring.boot;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = SmartCaptchaProperties.PREFIX)
+/**
+ * <p>Configuration properties for SmartCaptcha.</p>
+ *
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
+ */
 public class SmartCaptchaProperties {
 
 	public static final String PREFIX = "smart-captcha";
