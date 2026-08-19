@@ -21,10 +21,20 @@ public class RefreshCaptchaJakartaFilter implements Filter {
     private static final String CAPTCHA_SESSION_KEY = "captcha";
 
     @Override
+    /**
+     * <p>Initializes the init.</p>
+     * @param filterConfig
+     */
     public void init(FilterConfig filterConfig) throws ServletException {
     }
 
     @Override
+    /**
+     * <p>Performs filter.</p>
+     * @param request
+     * @param response
+     * @param chain
+     */
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
         if (request instanceof HttpServletRequest) {
@@ -35,6 +45,9 @@ public class RefreshCaptchaJakartaFilter implements Filter {
     }
 
     @Override
+    /**
+     * <p>Destroy.</p>
+     */
     public void destroy() {
     }
 }

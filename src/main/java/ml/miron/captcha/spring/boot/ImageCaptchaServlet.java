@@ -29,6 +29,11 @@ public class ImageCaptchaServlet extends HttpServlet {
     }
 
     @Override
+    /**
+     * <p>Performs get.</p>
+     * @param req
+     * @param resp
+     */
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int height = properties.getHeight();
         int width = properties.getWidth();

@@ -26,6 +26,11 @@ public class SmartCaptchaAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean(name = "imageCaptchaServlet")
+    /**
+     * <p>Image captcha servlet.</p>
+     * @param properties
+     * @return the image captcha servlet
+     */
     public ServletRegistrationBean<HttpServlet> imageCaptchaServlet(SmartCaptchaProperties properties) {
         ServletRegistrationBean<HttpServlet> registrationBean = new ServletRegistrationBean<>();
         registrationBean.setServlet(new ImageCaptchaServlet(properties));
@@ -35,6 +40,11 @@ public class SmartCaptchaAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean(name = "audioCaptchaServlet")
+    /**
+     * <p>Audio captcha servlet.</p>
+     * @param properties
+     * @return the audio captcha servlet
+     */
     public ServletRegistrationBean<HttpServlet> audioCaptchaServlet(SmartCaptchaProperties properties) {
         ServletRegistrationBean<HttpServlet> registrationBean = new ServletRegistrationBean<>();
         registrationBean.setServlet(new AudioCaptchaServlet());
@@ -44,6 +54,11 @@ public class SmartCaptchaAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean(name = "refreshCaptchaFilter")
+    /**
+     * <p>Refresh captcha filter.</p>
+     * @param properties
+     * @return the refresh captcha filter
+     */
     public FilterRegistrationBean<Filter> refreshCaptchaFilter(SmartCaptchaProperties properties) {
         FilterRegistrationBean<Filter> registrationBean = new FilterRegistrationBean<>();
         registrationBean.setFilter(new RefreshCaptchaJakartaFilter());

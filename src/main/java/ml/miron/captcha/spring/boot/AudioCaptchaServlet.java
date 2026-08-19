@@ -22,6 +22,11 @@ public class AudioCaptchaServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     @Override
+    /**
+     * <p>Performs get.</p>
+     * @param req
+     * @param resp
+     */
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         AudioCaptcha audioCaptcha = new AudioCaptcha.Builder()
                 .addAnswer()
